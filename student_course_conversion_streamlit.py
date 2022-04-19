@@ -42,7 +42,7 @@ if uploaded_file1 is not None:
     st.text('学生のデータ：')
     st.dataframe(dat_all)
     
-uploaded_file2 = st.file_uploader("講義一覧のcsvファイルをアップロードして下さい．", type=["xlsx", "csv"])
+uploaded_file2 = st.file_uploader("講義一覧のファイルをアップロードして下さい．", type=["xlsx", "csv"])
 
 if uploaded_file2 is not None:
 
