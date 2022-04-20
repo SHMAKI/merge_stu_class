@@ -9,9 +9,9 @@ import base64
 from PIL import Image
 import re
 
-def file_downloader(filename, file_label='File'):
-    with open(filename, 'rb') as f:
-        data = f.read()
+# def file_downloader(filename, file_label='File'):
+#     with open(filename, 'rb') as f:
+#         data = f.read()
         
 def try_read_df(f):
     try:
@@ -19,10 +19,8 @@ def try_read_df(f):
     except:
         return pd.read_excel(f)
 
-
 st.title('学生コース登録用ファイル変換')
 st.text('学生リストと講義リストを入力とし，\nmoodleのコースフォーマットリストを返します．')
-
 
 uploaded_file1 = st.file_uploader("学生のデータが入ったファイルを入力して下さい．", type=["xlsx", "csv"])
 
@@ -89,8 +87,11 @@ if st.button('ファイル変換実行'):
             csv = df.to_csv(index=False)
 
         st.success('変換終了')
-        b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href="data:application/octet-stream;base64,{b64}" download="student_class.csv">download</a>'
-        st.markdown(f"変換データをダウンロードする： {href}", unsafe_allow_html=True)
+        st.download_button(label='変換ファイルのダウンロード 📥',
+                                data=csv,
+                                file_name= 'student_class.csv')
+#         b64 = base64.b64encode(csv.encode()).decode()
+#         href = f'<a href="data:application/octet-stream;base64,{b64}" download="student_class.csv">download</a>'
+#         st.markdown(f"変換データをダウンロードする： {href}", unsafe_allow_html=True)
     else:
         st.warning("全てのデータを入力して下さい")
