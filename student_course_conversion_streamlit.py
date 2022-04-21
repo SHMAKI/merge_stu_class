@@ -20,7 +20,7 @@ def try_read_df(f):
         return pd.read_excel(f)
 
 st.title('学生コース登録用ファイル変換')
-st.text('学生リストと講義リストを入力とし，\nmoodleのコースフォーマットリストを返します．')
+st.text('学生リストと講義リストを入力とし，\nmoodleのコースフォーマットリストを返します．\n姓名メールアドレス等個人情報が含まれるデータは入力しないで下さい．')
 
 uploaded_file1 = st.file_uploader("学生のデータが入ったファイルを入力して下さい．", type=["xlsx", "csv"])
 
