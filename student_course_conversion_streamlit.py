@@ -14,7 +14,7 @@ import re
 #         data = f.read()
         
 def try_read_df(f):
-    if f.endswith("xlsx"):
+    if f.name.endswith("xlsx"):
         try:
             return pd.read_excel(f)
         except UnicodeDecodeError:
@@ -22,7 +22,7 @@ def try_read_df(f):
 #         except Exception as err:
 #             print(f"Unexpected {err=}, {type(err)=}")
     
-    elif f.endswith("csv"):
+    elif f.name.endswith("csv"):
         try:
             return pd.read_csv(f)
         except UnicodeDecodeError:
