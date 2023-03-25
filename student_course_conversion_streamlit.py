@@ -9,9 +9,7 @@ import base64
 from PIL import Image
 import re
 
-# def file_downloader(filename, file_label='File'):
-#     with open(filename, 'rb') as f:
-#         data = f.read()
+from io import StringIO
         
 def try_read_df(f):
     if f.name.endswith("xlsx"):
@@ -24,8 +22,7 @@ def try_read_df(f):
         try:
             return pd.read_csv(f)
         except UnicodeDecodeError:
-            f=f.getvalue().decode('utf-8')
-            return pd.read_csv(f)#, encoding="CP932")
+            return pd.read_csv(f.read(), encoding="CP932")
 #         except Exception as err:
 #            print(err)
 #            print(type(err))
