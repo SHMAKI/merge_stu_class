@@ -14,6 +14,7 @@ import re
 #         data = f.read()
         
 def try_read_df(f):
+    f=f.getvalue().decode('utf-8')
     if f.name.endswith("xlsx"):
         try:
             return pd.read_excel(f)
