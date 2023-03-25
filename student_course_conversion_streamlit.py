@@ -14,10 +14,24 @@ import re
 #         data = f.read()
         
 def try_read_df(f):
-    try:
-        return pd.read_csv(f)
-    except:
-        return pd.read_excel(f)
+    if f.endswith("xlsx"):
+        try:
+            return pd.read_excel(f)
+        except UnicodeDecodeError:
+            return pd.read_excel(f, encoding="CP932")
+        except Exception as err:
+            print(f"Unexpected {err=}, {type(err)=}")
+    
+    elif f.endswith("csv"):
+        try:
+            return pd.read_csv(f)
+        except UnicodeDecodeError:
+            return pd.read_csv(f, encoding="CP932")
+        except Exception as err:
+            print(f"Unexpected {err=}, {type(err)=}")
+    
+    else:
+        print("This file is not xlsx or csv")
 
 st.title('学生コース登録用ファイル変換')
 st.text('学生リストと講義リストを入力とし，\nmoodleのコースフォーマットリストを返します．\n姓名メールアドレス等個人情報が含まれるデータは入力しないで下さい．')
