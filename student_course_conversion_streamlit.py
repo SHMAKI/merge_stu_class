@@ -23,7 +23,7 @@ def try_read_df(f):
     elif f.name.endswith("csv"):
         try:
             return pd.read_csv(f)
-        except:# UnicodeDecodeError:
+        except UnicodeDecodeError:
             return pd.read_csv(f, encoding="CP932")
         except Exception as err:
            print(err)
