@@ -22,9 +22,12 @@ def try_read_df(f):
         try:
             return pd.read_csv(f)
         except UnicodeDecodeError:
-            tmp_df = f.getvalue()
-            tmp_df = StringIO(tmp_df)
-            return pd.read_csv(tmp_df, encoding="CP932")
+            bytes_data = f.getvalue()
+            string_data = StringIO(bytes_data.decode("utf-8"))
+            return pd.read_csv(f)
+            #tmp_df = f.getvalue()
+            #tmp_df = StringIO(tmp_df)
+            #return pd.read_csv(tmp_df, encoding="CP932")
 #         except Exception as err:
 #            print(err)
 #            print(type(err))
