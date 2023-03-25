@@ -25,9 +25,9 @@ def try_read_df(f):
             return pd.read_csv(f)
         except:# UnicodeDecodeError:
             return pd.read_csv(f, encoding="CP932")
-        #except Exception as err:
-        #    print(err)
-        #    print(type(err))
+        except Exception as err:
+           print(err)
+           print(type(err))
             
 st.title('学生コース登録用ファイル変換')
 st.text('学生リストと講義リストを入力とし，\nmoodleのコースフォーマットリストを返します．\n姓名メールアドレス等個人情報が含まれるデータは入力しないで下さい．')
@@ -53,7 +53,7 @@ if uploaded_file1 is not None:
 uploaded_file2 = st.file_uploader("講義一覧のファイルをアップロードして下さい．", type=["xlsx", "csv"])
 
 if uploaded_file2 is not None:
-
+    try_read_df(uploaded_file2)
     dat_course = try_read_df(uploaded_file2)
     st.text("続いて，category_path, shortnameの列を選択して下さい")
     
