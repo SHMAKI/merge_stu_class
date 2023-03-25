@@ -14,7 +14,6 @@ import re
 #         data = f.read()
         
 def try_read_df(f):
-    f=f.getvalue().decode('utf-8')
     if f.name.endswith("xlsx"):
         try:
             return pd.read_excel(f)
@@ -25,7 +24,8 @@ def try_read_df(f):
         try:
             return pd.read_csv(f)
         except UnicodeDecodeError:
-            return pd.read_csv(f, encoding="CP932")
+            f=f.getvalue().decode('utf-8')
+            return pd.read_csv(f)#, encoding="CP932")
 #         except Exception as err:
 #            print(err)
 #            print(type(err))
