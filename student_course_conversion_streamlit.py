@@ -19,16 +19,16 @@ def try_read_df(f):
             return pd.read_excel(f)
         except UnicodeDecodeError:
             return pd.read_excel(f, encoding="CP932")
-        except Exception as err:
-            print(f"Unexpected {err=}, {type(err)=}")
+#         except Exception as err:
+#             print(f"Unexpected {err=}, {type(err)=}")
     
     elif f.endswith("csv"):
         try:
             return pd.read_csv(f)
         except UnicodeDecodeError:
             return pd.read_csv(f, encoding="CP932")
-        except Exception as err:
-            print(f"Unexpected {err=}, {type(err)=}")
+#         except Exception as err:
+#             print(f"Unexpected {err=}, {type(err)=}")
     
     else:
         print("This file is not xlsx or csv")
